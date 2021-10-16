@@ -19,15 +19,13 @@ namespace Api
             this.productData = productData;
         }
 
-        [FunctionName("ProductsGet")]
+        [FunctionName("GetProducts")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "products")] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
-
-            var products = await this.productData.GetProducts();
+            var products = await productData.GetProducts();
             return new OkObjectResult(products);
-        }   
+        }
     }
 }
